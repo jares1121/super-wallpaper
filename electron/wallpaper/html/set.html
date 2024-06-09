@@ -1,0 +1,75 @@
+<!--
+ * @Author: jares
+ * @Date: 2022-12-28 21:50:27
+ * @LastEditors: jares
+ * @LastEditTime: 2023-01-05 20:15:16
+ * @Description:
+ *
+ * Copyright (c) 2022 by jares, All Rights Reserved.
+-->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>桌面程序</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				width: 250px;
+				height: 400px;
+				padding: 20px;
+				box-sizing: border-box;
+				overflow: hidden;
+			}
+			.container {
+				width: 100%;
+				height: 100%;
+				color: #fff;
+				border-radius: 5px;
+				background: rgba(36, 36, 36, 1);
+				box-shadow: 0 0 10px rgba(36, 36, 36, 0.5);
+				overflow: hidden;
+			}
+			.container ul {
+				padding: 10px 0;
+			}
+			.container ul li {
+				font-size: 14px;
+				height: 35px;
+				padding: 0 20px;
+				line-height: 35px;
+				box-sizing: border-box;
+				cursor: pointer;
+			}
+			.container ul li:hover {
+				color: #fff;
+				background-color: rgba(255, 255, 255, 0.2);
+			}
+		</style>
+	</head>
+	<body>
+		<h1>设置</h1>
+		<input type="file" value="" id="fileInput"/>
+		<button id="btn">设置</button>
+		<img	src=""/>
+	</body>
+	<script>
+		var path = ''
+		document.getElementById('fileInput').addEventListener('change', (event) => {
+			const fileList = event.target.files; // 文件列表
+			if (fileList.length > 0) {
+				// 获取第一个文件的实际路径
+				path = fileList[0].path;
+			}
+		});
+		let btn = document.getElementById('btn')
+		btn.onclick = () => {
+			window.trayAPI.setPaper(path)
+		}
+	</script>
+</html>
