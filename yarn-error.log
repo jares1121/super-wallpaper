@@ -1,0 +1,64 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\jares\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js publish
+
+PATH: 
+  C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Proram Files\Certbot\bin;C:\Pro;ram Files\apache-maven-3.9.1\bin;F:\mysql-5.7.9-winx64\bin;C:\Program Files\Certbot\bin;D:\mysql-5.7.9-winx64\bin;C:\Program Files\Git\cmd;D:\Program Files\Tencent\微信web开发者工具\dll;C:\Users\jares\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\jares\AppData\Local\Microsoft\WindowsApps;D:\Program Files\Fiddler;D:\Program Files\Microsoft VS Code\bin;C:\Users\jares\AppData\Roaming\npm;D:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2023.1.1\bin;;D:\Program Files\JetBrains\IntelliJ IDEA 2023.1.1\bin;;"C:\Program Files\Java\jdk-20\bin;";"C:\Program Files\Java\jdk-20\jre\bin;";C:\Users\jares\AppData\Roaming\nvm;C:\Program Files\nodejs
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  20.10.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (C:\Users\jares\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:137150:13)
+      at Interface.emit (node:events:514:28)
+      at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1125:18)
+      at ReadStream.onkeypress (node:internal/readline/interface:264:20)
+      at ReadStream.emit (node:events:514:28)
+      at emitKeys (node:internal/readline/utils:371:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (node:internal/readline/emitKeypressEvents:64:36)
+      at ReadStream.emit (node:events:514:28)
+      at addChunk (node:internal/streams/readable:545:12)
+
+npm manifest: 
+  {
+    "name": "super-wallpaper",
+    "version": "1.0.0",
+    "description": "超级壁纸",
+    "main": "./electron/wallpaper/main.js",
+    "scripts": {
+  	"start": "electron-forge start",
+      "package": "electron-forge package",
+      "make": "electron-forge make",
+      "publish": "electron-forge publish"
+    },
+    "author": "jares chiang",
+    "license": "ISC",
+    "dependencies": {
+      "electron-squirrel-startup": "^1.0.1",
+      "wallpaper": "^5.0.1"
+    },
+    "devDependencies": {
+      "@electron-forge/cli": "^7.4.0",
+      "@electron-forge/maker-deb": "^7.4.0",
+      "@electron-forge/maker-rpm": "^7.4.0",
+      "@electron-forge/maker-squirrel": "^7.4.0",
+      "@electron-forge/maker-zip": "^7.4.0",
+      "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+      "@electron-forge/plugin-fuses": "^7.4.0",
+      "@electron/fuses": "^1.8.0",
+      "electron": "^30.1.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

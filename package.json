@@ -4,20 +4,35 @@
   "description": "超级壁纸",
   "main": "./electron/wallpaper/main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron-forge start",
     "web:serve": "vue-cli-service serve",
     "web:build": "vue-cli-service build",
     "electron:dev": "electron .",
     "electron:build": "electron-builder --config ./electron/build/build.config.js",
     "lint": "vue-cli-service lint",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "start1": "electron-forge start",
+    "package1": "electron-forge package",
+    "make1": "electron-forge make",
+    "publish1": "electron-forge publish"
   },
   "author": "jares chiang",
   "license": "ISC",
   "dependencies": {
+    "electron-squirrel-startup": "^1.0.1",
     "wallpaper": "^5.0.1"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-fuses": "^7.4.0",
+    "@electron/fuses": "^1.8.0",
     "electron": "^30.1.0",
     "electron-builder": "^24.13.3"
   }

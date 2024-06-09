@@ -18,7 +18,7 @@ const config = {
 		output: 'release/${version}'
 	},
 	win: {
-		icon: path.join(__dirname, '../static/images/favicon.ico'),
+		icon: path.join(__dirname, '../wallpaper/static/images/favicon.ico'),
 		target: [
 			{
 				target: 'nsis',
@@ -30,12 +30,13 @@ const config = {
 		oneClick: false,
 		allowElevation: true,
 		allowToChangeInstallationDirectory: true,
-		installerIcon: path.join(__dirname, '../static/images/favicon.ico'),
-		uninstallerIcon: path.join(__dirname, '../static/images/favicon.ico'),
-		installerHeaderIcon: path.join(__dirname, '../static/images/favicon.ico'),
+		installerIcon: path.join(__dirname, '../wallpaper/static/images/favicon.ico'),
+		uninstallerIcon: path.join(__dirname, '../wallpaper/static/images/favicon.ico'),
+		installerHeaderIcon: path.join(__dirname, '../wallpaper/static/images/favicon.ico'),
 		createDesktopShortcut: true,
 		createStartMenuShortcut: true,
-		shortcutName: 'super-wallpaper'
+		shortcutName: 'super-wallpaper',
+		include: 'resources/installer.nsh'
 	}
 }
 module.exports = config
