@@ -79,7 +79,7 @@ function createCustomTray(bounds) {
 		height: height,
 		icon: path.join(__dirname, './static/images/icon.png'),
 		webPreferences: {
-			preload: path.join(__dirname, 'preload.js')
+			preload: path.join(__dirname, './preload.js')
 		},
 		// 窗口是否永远在别的窗口的上面
 		alwaysOnTop: true,

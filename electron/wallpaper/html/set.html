@@ -69,6 +69,7 @@
 		});
 		let btn = document.getElementById('btn')
 		btn.onclick = () => {
+			window.trayAPI.get()
 			window.trayAPI.setPaper(path)
 		}
 	</script>

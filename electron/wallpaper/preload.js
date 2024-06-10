@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 17:56:16
  * @LastEditors: jares
- * @LastEditTime: 2023-01-09 23:19:39
+ * @LastEditTime: 2024-06-10 17:04:11
  * @Description:
  * 暴露API
  * Copyright (c) 2023 by jares, All Rights Reserved.
@@ -36,6 +36,9 @@ contextBridge.exposeInMainWorld('trayAPI', {
 	// 退出
 	quit: (params) => ipcRenderer.send('quit', params),
 	// 设置
+	// get: (params) =>  ipcRenderer.on('message-from-main', (event, arg) => {
+	// 	console.log(arg, 'arg') // 打印主进程发送的消息
+	// }),
 	set: (params) => ipcRenderer.send('set', params),
 	// 设置壁纸
 	setPaper: (params) => ipcRenderer.send('setPaper', params),

@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 17:56:14
  * @LastEditors: jares
- * @LastEditTime: 2024-06-10 00:54:17
+ * @LastEditTime: 2024-06-10 17:01:35
  * @Description:
  *
  * Copyright (c) 2022 by jares, All Rights Reserved.
@@ -21,7 +21,7 @@ function createWindow() {
 		height: 800,
 		icon: path.join(__dirname, './static/images/icon.png'),
 		webPreferences: {
-			preload: path.join(__dirname, 'preload.js')
+			preload: path.join(__dirname, './preload.js')
 		},
 		frame: false, // 无边框窗口
 		transparent: false // 窗口透明
@@ -42,9 +42,10 @@ app.whenReady().then(() => {
 	init()
 })
 // 设置壁纸
-ipcMain.on('setPaper', (event, message) => {
+ipcMain.on('setPaper', async (event, message) => {
 	const { init } = require('./modules/setPaper')
 	init(message)
+	// event.reply('message-from-main', await init(message)) // 向渲染进程发送消息
 })
 // 打开设置面板
 ipcMain.on('set', (event, message) => {

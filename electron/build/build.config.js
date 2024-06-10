@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2023-01-03 22:07:25
  * @LastEditors: jares
- * @LastEditTime: 2023-01-04 11:29:43
+ * @LastEditTime: 2024-06-10 17:00:23
  * @Description:
  *
  * Copyright (c) 2023 by jares, All Rights Reserved.
@@ -14,6 +14,9 @@ const config = {
 	appId: 'com.electron.jares',
 	copyright: 'Copyright © 2023 ${author}',
 	asar: true,
+	files: [],
+	extraFiles: ['./electron/wallpaper/static'],
+	extraResources: ['./static'],
 	directories: {
 		output: 'release/${version}'
 	},
@@ -30,13 +33,21 @@ const config = {
 		oneClick: false,
 		allowElevation: true,
 		allowToChangeInstallationDirectory: true,
-		installerIcon: path.join(__dirname, '../wallpaper/static/images/favicon.ico'),
-		uninstallerIcon: path.join(__dirname, '../wallpaper/static/images/favicon.ico'),
-		installerHeaderIcon: path.join(__dirname, '../wallpaper/static/images/favicon.ico'),
+		installerIcon: path.join(
+			__dirname,
+			'../wallpaper/static/images/favicon.ico'
+		),
+		uninstallerIcon: path.join(
+			__dirname,
+			'../wallpaper/static/images/favicon.ico'
+		),
+		installerHeaderIcon: path.join(
+			__dirname,
+			'../wallpaper/static/images/favicon.ico'
+		),
 		createDesktopShortcut: true,
 		createStartMenuShortcut: true,
-		shortcutName: 'super-wallpaper',
-		include: 'resources/installer.nsh'
+		shortcutName: 'super-wallpaper'
 	}
 }
 module.exports = config

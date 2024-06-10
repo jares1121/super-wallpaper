@@ -9,7 +9,7 @@ const setWindow = () => {
 		height: 600,
 		icon: path.join(__dirname, '../static/images/icon.png'),
 		webPreferences: {
-			preload: path.join(__dirname, 'preload.js')
+			preload: path.join(__dirname, '../preload.js')
 		},
 		frame: false, // 无边框窗口
 		transparent: false // 窗口透明
