@@ -1,6 +1,6 @@
 {
 	"name": "super-wallpaper",
-	"version": "1.0.8",
+	"version": "0.0.1",
 	"description": "超级壁纸",
 	"main": "./electron/wallpaper/main.js",
 	"scripts": {
@@ -21,6 +21,7 @@
 	"dependencies": {
 		"capture-website": "^1.4.0",
 		"electron-squirrel-startup": "^1.0.1",
+		"electron-updater": "^6.2.1",
 		"request": "^2.88.2",
 		"wallpaper": "^5.0.1"
 	},

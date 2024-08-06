@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 17:56:14
  * @LastEditors: jares
- * @LastEditTime: 2024-06-10 17:01:35
+ * @LastEditTime: 2024-08-06 17:08:18
  * @Description:
  *
  * Copyright (c) 2022 by jares, All Rights Reserved.
@@ -10,7 +10,7 @@
 
 const path = require('path')
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
-
+const checkUpdate = require('./UpdateController');
 try {
 	require('electron-reloader')(module)
 } catch (_) {}
@@ -26,13 +26,19 @@ function createWindow() {
 		frame: false, // 无边框窗口
 		transparent: false // 窗口透明
 	})
-	// mainWindow.loadFile('./dist/index.html')
-	mainWindow.loadURL('http://www.ergirl.com')
+	// mainWindow.loadFile('/html/set.html')
+	mainWindow.loadURL('http://www.baidu.com')
 	mainWindow.webContents.openDevTools()
 	module.exports = { mainWindow }
 }
+
+Object.defineProperty(app, 'isPackaged', {
+	get() {
+		return true
+	}
+})
 app.whenReady().then(() => {
-	// createWindow()
+	createWindow()
 	// app.on('activate', function () {
 	// 	if (BrowserWindow.getAllWindows().length === 0) createWindow()
 	// 	// menu()
@@ -40,6 +46,7 @@ app.whenReady().then(() => {
 	const tray = require('./tray.js')
 	const { init } = require('./modules/setPaper')
 	init()
+	checkUpdate(mainWindow) //检查更新
 })
 // 设置壁纸
 ipcMain.on('setPaper', async (event, message) => {
