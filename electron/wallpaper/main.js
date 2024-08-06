@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 17:56:14
  * @LastEditors: jares
- * @LastEditTime: 2024-08-06 17:08:18
+ * @LastEditTime: 2024-08-06 22:40:59
  * @Description:
  *
  * Copyright (c) 2022 by jares, All Rights Reserved.
@@ -11,6 +11,8 @@
 const path = require('path')
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
 const checkUpdate = require('./UpdateController');
+const fs = require('fs')
+
 try {
 	require('electron-reloader')(module)
 } catch (_) {}
@@ -47,6 +49,31 @@ app.whenReady().then(() => {
 	const { init } = require('./modules/setPaper')
 	init()
 	checkUpdate(mainWindow) //检查更新
+// 更新出错 加上这些
+	//我们的软件发布地址
+	const feed = 'your_site/update/windows_64'
+
+	let yaml = ''
+	let appName = 'ZhangWuJi_App'
+	yaml += 'provider: generic\n'
+	yaml += 'url: your_site/update/windows_64\n'
+	yaml += 'useMultipleRangeRequest: false\n'
+	yaml += 'channel: latest\n'
+	yaml += 'updaterCacheDirName: ' + appName
+
+	let update_file = [path.join(process.resourcesPath, 'app-update.yml'), yaml]
+	let dev_update_file = [
+		path.join(process.resourcesPath, 'dev-app-update.yml'),
+		yaml
+	]
+	let chechFiles = [update_file, dev_update_file]
+
+	for (let file of chechFiles) {
+		if (!fs.existsSync(file[0])) {
+			fs.writeFileSync(file[0], file[1], () => {})
+		}
+	}
+
 })
 // 设置壁纸
 ipcMain.on('setPaper', async (event, message) => {
