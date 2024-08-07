@@ -14,7 +14,8 @@
 		"package": "electron-forge package",
 		"start": "electron-forge start",
 		"publish": "electron-forge publish",
-		"build:mac": "electron-builder --win --config --publish always"
+		"build:mac": "electron-builder --win --config --publish always",
+		"build": "electron-builder --win --config"
 	},
 	"author": "jares chiang",
 	"license": "ISC",
