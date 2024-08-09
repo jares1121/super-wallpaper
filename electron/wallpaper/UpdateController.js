@@ -101,9 +101,7 @@ autoUpdater.autoDownload = false
 autoUpdater.autoInstallOnAppQuit = false
 const checkUpdate = () => {
 	// 设置更新源url
-	autoUpdater.setFeedURL(
-		'http://lizetoolbox.top:83/updater/lize-tools-pc'
-	)
+	autoUpdater.setFeedURL('http://localhost:8011/')
 	//检查是否有更新
 	autoUpdater.checkForUpdates()
 
