@@ -1,26 +1,25 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\jares\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js publish
+  C:\Program Files\nodejs\node.exe C:\Users\pc1\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add electron-updater
 
 PATH: 
-  C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Proram Files\Certbot\bin;C:\Pro;ram Files\apache-maven-3.9.1\bin;F:\mysql-5.7.9-winx64\bin;C:\Program Files\Certbot\bin;D:\mysql-5.7.9-winx64\bin;C:\Program Files\Git\cmd;D:\Program Files\Tencent\微信web开发者工具\dll;C:\Users\jares\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\jares\AppData\Local\Microsoft\WindowsApps;D:\Program Files\Fiddler;D:\Program Files\Microsoft VS Code\bin;C:\Users\jares\AppData\Roaming\npm;D:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2023.1.1\bin;;D:\Program Files\JetBrains\IntelliJ IDEA 2023.1.1\bin;;"C:\Program Files\Java\jdk-20\bin;";"C:\Program Files\Java\jdk-20\jre\bin;";C:\Users\jares\AppData\Roaming\nvm;C:\Program Files\nodejs;
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Users\pc1\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Pro;ram Files\Certbot\bin;C:\Program Fies\nodejs\;C:\Program Files\Certbot\bin;C:\P;ogram Files\Git\cmd;%JAVA_;OME%\bin;C:\Program Files\Java\jdk-20\jre\bin;C:\Program Files\apache-maven-3.9.2\bin;;;C:\Program Files\Git\cmd;C:\Program Files (x86)\Tencent\微信web开发者工具\dll;C:\Users\pc1\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\pc1\AppData\Local\Programs\Python\Python38\;C:\Users\pc1\AppData\Local\Programs\Python\Python38-32\Scripts\;C:\Users\pc1\AppData\Local\Programs\Python\Python38-32\;C:\Users\pc1\AppData\Local\Microsoft\WindowsApps;C:\Users\pc1\AppData\Roaming\nvm;C:\Windows\system32\cmd.exe;D:\测试\node_modules\.bin;C:\Users\pc1\AppData\Roaming\npm;C:\Users\pc1\AppData\Local\Programs\Fiddler;C:\Users\pc1\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Python27;;C:\Program Files\JetBrains\IntelliJ IDEA 2023.1.2\bin;;C:\Program Files\JetBrains\WebStorm 2023.3.5\bin;;C:\Users\pc1\AppData\Local\Programs\Microsoft VS Code\bin
 
 Yarn version: 
-  1.22.19
+  1.22.18
 
 Node version: 
-  19.9.0
+  20.10.0
 
 Platform: 
   win32 x64
 
 Trace: 
-  Error: getaddrinfo ENOTFOUND npm.aliyun.com
-      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:107:26)
+  Error: ENOENT: no such file or directory, copyfile 'C:\Users\pc1\AppData\Local\Yarn\Cache\v6\npm-wrap-ansi-7.0.0-67e145cff510a6a6984bdf1152911d69d2eb9e43-integrity\node_modules\wrap-ansi\license' -> 'C:\Users\pc1\Desktop\super-wallpaper\node_modules\electron-builder\node_modules\wrap-ansi\license'
 
 npm manifest: 
   {
   	"name": "super-wallpaper",
-  	"version": "1.0.11",
+  	"version": "1.0.8",
   	"description": "超级壁纸",
   	"main": "./electron/wallpaper/main.js",
   	"scripts": {
@@ -34,7 +33,7 @@ npm manifest:
   		"package": "electron-forge package",
   		"start": "electron-forge start",
   		"publish": "electron-forge publish",
-  		"build:mac": "electron-builder --win --config"
+  		"build:mac": "electron-builder --win --config --publish always"
   	},
   	"author": "jares chiang",
   	"license": "ISC",
