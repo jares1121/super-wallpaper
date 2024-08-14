@@ -17,6 +17,14 @@
 		"build:mac": "electron-builder --win --config --publish always",
 		"build": "electron-builder --win --config"
 	},
+	"build": {
+		"publish": [
+			{
+				"provider": "generic",
+				"url": "http://localhost:8882/"
+			}
+		]
+	},
 	"author": "jares chiang",
 	"license": "ISC",
 	"dependencies": {
