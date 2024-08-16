@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 17:56:14
  * @LastEditors: jares
- * @LastEditTime: 2024-08-15 22:16:31
+ * @LastEditTime: 2024-08-16 16:10:35
  * @Description:
  *
  * Copyright (c) 2022 by jares, All Rights Reserved.
@@ -10,7 +10,8 @@
 
 const path = require('path')
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
-const checkUpdate = require('./UpdateController');
+// const checkUpdate = require('./UpdateController');
+const checkUpdate = require('./update');
 const fs = require('fs')
 const { autoUpdater } = require('electron-updater')
 const { dialog } = require('electron')
@@ -31,8 +32,8 @@ function createWindow() {
 		transparent: false // 窗口透明
 	})
 	// mainWindow.loadFile('/html/set.html')
-	mainWindow.loadURL('http://www.baidu.com')
 	mainWindow.webContents.openDevTools()
+	mainWindow.loadURL('http://www.baidu.com')
 	module.exports = { mainWindow }
 }
 
@@ -75,103 +76,6 @@ app.whenReady().then(() => {
 // 			fs.writeFileSync(file[0], file[1], () => {})
 // 		}
 // 	}
- autoUpdater.checkForUpdates()
- autoUpdater.autoDownload = false
- autoUpdater.autoInstallOnAppQuit = true
- autoUpdater.on('checking-for-update', () => {
-		dialog
-			.showMessageBox({
-				type: 'info',
-				title: 'Checking for update...',
-				message: 'Checking for update...',
-				buttons: ['是', '否']
-			})
-			.then((result) => {
-				if (result.response === 0) {
-					// 用户选择更新，触发下载和安装
-					autoUpdater.downloadUpdate()
-				}
-			})
- })
-
- autoUpdater.on('update-available', (info) => {
-		// 当有新版本可用时，弹窗提示用户
-		dialog
-			.showMessageBox({
-				type: 'info',
-				title: '新版本可用',
-				message: '有一个可用的新版本，要更新吗',
-				buttons: ['是', '否']
-			})
-			.then((result) => {
-				if (result.response === 0) {
-					// 用户选择更新，触发下载和安装
-					autoUpdater.downloadUpdate()
-				}
-			})
- })
-
- autoUpdater.on('update-not-available', (info) => {
-		dialog
-			.showMessageBox({
-				type: 'info',
-				title: 'Update not available.',
-				message: 'Update not available.',
-				buttons: ['是', '否']
-			})
-			.then((result) => {
-				if (result.response === 0) {
-					// 用户选择更新，触发下载和安装
-					autoUpdater.downloadUpdate()
-				}
-			})
- })
-
- autoUpdater.on('error', (err) => {
-		dialog
-			.showMessageBox({
-				type: 'info',
-				title: 'err',
-				message: 'err',
-				buttons: ['是', '否']
-			})
-			.then((result) => {
-				if (result.response === 0) {
-					// 用户选择更新，触发下载和安装
-					autoUpdater.downloadUpdate()
-				}
-			})
- })
-
- autoUpdater.on('update-downloaded', () => {
-		// 处理下载完成的情况
-		dialog
-			.showMessageBox({
-				type: 'info',
-				title: '更新下载完成',
-				message: '点击确定重启获取最新内容',
-				buttons: ['确定']
-			})
-			.then(() => {
-				// 调用 quitAndInstall 来安装更新
-				autoUpdater.quitAndInstall()
-			})
- })
- autoUpdater.on('download-progress', (progressObj) => {
-		dialog
-			.showMessageBox({
-				type: 'info',
-				title: JSON.stringify(progressObj),
-				message: JSON.stringify(progressObj),
-				buttons: ['是', '否']
-			})
-			.then((result) => {
-				if (result.response === 0) {
-					// 用户选择更新，触发下载和安装
-					autoUpdater.downloadUpdate()
-				}
-			})
- })
 
 })
 // 设置壁纸
@@ -188,4 +92,9 @@ ipcMain.on('set', (event, message) => {
 // 退出
 ipcMain.on('quit', (event, message) => {
 	app.quit()
+})
+// 退出
+ipcMain.on('update', (event, message) => {
+	console.log('更新');
+	checkUpdate(mainWindow)
 })

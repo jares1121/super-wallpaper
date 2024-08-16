@@ -42,4 +42,5 @@ contextBridge.exposeInMainWorld('trayAPI', {
 	set: (params) => ipcRenderer.send('set', params),
 	// 设置壁纸
 	setPaper: (params) => ipcRenderer.send('setPaper', params),
+	update: (params) => ipcRenderer.send('update', params)
 })

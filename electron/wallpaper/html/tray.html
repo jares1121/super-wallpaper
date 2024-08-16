@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 21:50:27
  * @LastEditors: jares
- * @LastEditTime: 2023-01-05 20:15:16
+ * @LastEditTime: 2024-08-16 15:34:23
  * @Description:
  *
  * Copyright (c) 2022 by jares, All Rights Reserved.
@@ -57,6 +57,7 @@
 			<ul>
 				<li id="set">设置</li>
 				<li id="quit">退出</li>
+				<li id="update">更新</li>
 			</ul>
 		</div>
 	</body>
@@ -67,10 +68,15 @@
 		function setFun() {
 			window.trayAPI.set()
 		}
+		function updateFun() {
+			window.trayAPI.update()
+		}
 
 		let set = document.getElementById('set')
 		let quit = document.getElementById('quit')
+		let update = document.getElementById('update')
 		set.onclick = setFun
 		quit.onclick = quitFun
+		update.onclick = updateFun
 	</script>
 </html>
