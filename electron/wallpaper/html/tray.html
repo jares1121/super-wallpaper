@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 21:50:27
  * @LastEditors: jares
- * @LastEditTime: 2024-08-16 15:34:23
+ * @LastEditTime: 2024-08-18 00:09:37
  * @Description:
  *
  * Copyright (c) 2022 by jares, All Rights Reserved.
@@ -56,8 +56,8 @@
 		<div class="container">
 			<ul>
 				<li id="set">设置</li>
-				<li id="quit">退出</li>
 				<li id="update">更新</li>
+				<li id="quit">退出</li>
 			</ul>
 		</div>
 	</body>
@@ -69,7 +69,7 @@
 			window.trayAPI.set()
 		}
 		function updateFun() {
-			window.trayAPI.update()
+			window.updateApi.update()
 		}
 
 		let set = document.getElementById('set')

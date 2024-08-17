@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 17:56:14
  * @LastEditors: jares
- * @LastEditTime: 2024-08-16 16:10:35
+ * @LastEditTime: 2024-08-18 00:06:33
  * @Description:
  *
  * Copyright (c) 2022 by jares, All Rights Reserved.
@@ -11,10 +11,8 @@
 const path = require('path')
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
 // const checkUpdate = require('./UpdateController');
-const checkUpdate = require('./update');
+const checkUpdate = require('./update')
 const fs = require('fs')
-const { autoUpdater } = require('electron-updater')
-const { dialog } = require('electron')
 
 try {
 	require('electron-reloader')(module)
@@ -26,14 +24,16 @@ function createWindow() {
 		height: 800,
 		icon: path.join(__dirname, './static/images/icon.png'),
 		webPreferences: {
-			preload: path.join(__dirname, './preload.js')
+			preload: path.join(__dirname, './preload.js'),
+			// nodeIntegration: true, // 改为true 即可
+			// contextIsolation: false,
 		},
 		frame: false, // 无边框窗口
-		transparent: false // 窗口透明
+		transparent: false, // 窗口透明
 	})
-	// mainWindow.loadFile('/html/set.html')
+	mainWindow.loadFile(path.join(__dirname, '/html/set.html'))
 	mainWindow.webContents.openDevTools()
-	mainWindow.loadURL('http://www.baidu.com')
+	// mainWindow.loadURL('http://www.baidu.com')
 	module.exports = { mainWindow }
 }
 
@@ -42,6 +42,14 @@ Object.defineProperty(app, 'isPackaged', {
 		return true
 	}
 })
+// 以后会用到
+// async function handleFileOpen() {
+// 	const { canceled, filePaths } = await dialog.showOpenDialog()
+// 	if (!canceled) {
+// 		return filePaths[0]
+// 	}
+// }
+
 app.whenReady().then(() => {
 	createWindow()
 	// app.on('activate', function () {
@@ -51,32 +59,6 @@ app.whenReady().then(() => {
 	const tray = require('./tray.js')
 	const { init } = require('./modules/setPaper')
 	init()
-// 	checkUpdate(mainWindow) //检查更新
-// // 更新出错 加上这些
-// 	//我们的软件发布地址
-// 	const feed = 'your_site/update/windows_64'
-
-// 	let yaml = ''
-// 	let appName = 'ZhangWuJi_App'
-// 	yaml += 'provider: generic\n'
-// 	yaml += 'url: your_site/update/windows_64\n'
-// 	yaml += 'useMultipleRangeRequest: false\n'
-// 	yaml += 'channel: latest\n'
-// 	yaml += 'updaterCacheDirName: ' + appName
-
-// 	let update_file = [path.join(process.resourcesPath, 'app-update.yml'), yaml]
-// 	let dev_update_file = [
-// 		path.join(process.resourcesPath, 'dev-app-update.yml'),
-// 		yaml
-// 	]
-// 	let chechFiles = [update_file, dev_update_file]
-
-// 	for (let file of chechFiles) {
-// 		if (!fs.existsSync(file[0])) {
-// 			fs.writeFileSync(file[0], file[1], () => {})
-// 		}
-// 	}
-
 })
 // 设置壁纸
 ipcMain.on('setPaper', async (event, message) => {
@@ -93,8 +75,7 @@ ipcMain.on('set', (event, message) => {
 ipcMain.on('quit', (event, message) => {
 	app.quit()
 })
-// 退出
+// 监听更新按钮
 ipcMain.on('update', (event, message) => {
-	console.log('更新');
 	checkUpdate(mainWindow)
 })
