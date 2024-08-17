@@ -79,3 +79,7 @@ ipcMain.on('quit', (event, message) => {
 ipcMain.on('update', (event, message) => {
 	checkUpdate(mainWindow)
 })
+// 双向监听
+// ipcMain.handle('updatePercent', () => {
+// 	return percent
+// })

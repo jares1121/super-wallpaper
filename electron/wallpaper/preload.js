@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 17:56:16
  * @LastEditors: jares
- * @LastEditTime: 2024-08-18 00:12:15
+ * @LastEditTime: 2024-08-18 00:15:40
  * @Description:
  * 暴露API
  * Copyright (c) 2023 by jares, All Rights Reserved.
@@ -48,5 +48,7 @@ contextBridge.exposeInMainWorld('updateApi', {
 	// 检查更新按钮
 	update: (params) => ipcRenderer.send('update', params),
 	// 更新进度
-	updatePercent: () => ipcRenderer.invoke('updatePercent')
+	// updatePercent: () => ipcRenderer.invoke('updatePercent'),
+	updatePercent: (callback) =>
+		ipcRenderer.on('updatePercent', (_event, value) => callback(value))
 })

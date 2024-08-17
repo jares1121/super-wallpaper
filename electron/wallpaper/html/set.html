@@ -69,15 +69,10 @@
 	<div id="content"></div>
 </body>
 <script>
-
-	setInterval(async () => {
-		try {
-			const filePath = await window.updateApi.updatePercent()
-			document.getElementById('content').innerText = filePath;
-		} catch { }
-	}, 1000)
-
-
+	window.updateApi.updatePercent((value) => {
+		console.log(value);
+		document.getElementById('content').innerText = value;
+	})
 	var path = ''
 	document.getElementById('fileInput').addEventListener('change', (event) => {
 		const fileList = event.target.files; // 文件列表

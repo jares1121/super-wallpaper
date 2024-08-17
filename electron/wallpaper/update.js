@@ -10,11 +10,10 @@
 const { autoUpdater } = require('electron-updater')
 const { dialog } = require('electron')
 const path = require('path')
-const { app, BrowserWindow, ipcMain, shell } = require('electron')
-const { contextBridge, ipcRenderer } = require('electron')
 
 const checkUpdate = (mainWindow) => {
-	autoUpdater.setFeedURL('http://localhost:8882/')
+	// 本地调试时打开 使用本地文件服务器
+	// autoUpdater.setFeedURL('http://localhost:8882/')
 	autoUpdater.checkForUpdates()
 	autoUpdater.autoDownload = false
 	autoUpdater.autoInstallOnAppQuit = true
@@ -93,25 +92,10 @@ const checkUpdate = (mainWindow) => {
 			})
 	})
 	// 在应用程序启动时设置差分下载逻辑
-	var percent = 0
 	autoUpdater.on('download-progress', (progressObj) => {
 		percent = progressObj.percent
-		// dialog
-		// 	.showMessageBox({
-		// 		type: 'info',
-		// 		title: JSON.stringify(progressObj),
-		// 		message: JSON.stringify(progressObj),
-		// 		buttons: ['是', '否']
-		// 	})
-		// 	.then((result) => {
-		// 		// if (result.response === 0) {
-		// 		// 	// 用户选择更新，触发下载和安装
-		// 		// 	autoUpdater.downloadUpdate()
-		// 		// }
-		// 	})
-	})
-	ipcMain.handle('updatePercent', () => {
-		return percent
+		// 向渲染进程通讯 发送进度
+		mainWindow.webContents.send('updatePercent', percent)
 	})
 }
 module.exports = checkUpdate
