@@ -11,7 +11,6 @@
 const path = require('path')
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
 const fs = require('fs')
-const checkUpdate = require('./update')
 
 try {
 	require('electron-reloader')(module)

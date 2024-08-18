@@ -2,14 +2,14 @@
  * @Author: jares
  * @Date: 2024-08-18 22:37:06
  * @LastEditors: jares
- * @LastEditTime: 2024-08-19 00:14:13
+ * @LastEditTime: 2024-08-19 00:18:16
  * @Description:
  *
  * Copyright (c) 2024 by jares, All Rights Reserved.
  */
 const path = require('path')
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
-const checkUpdate = require('./index.js')
+const checkUpdate = require('./index')
 
 var child
 const updateWindow = () => {
