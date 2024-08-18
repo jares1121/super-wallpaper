@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2024-08-17 15:10:34
  * @LastEditors: jares
- * @LastEditTime: 2024-08-18 00:01:31
+ * @LastEditTime: 2024-08-18 23:50:21
  * @Description:
  *
  * Copyright (c) 2024 by jares, All Rights Reserved.
@@ -13,7 +13,7 @@ const path = require('path')
 
 const checkUpdate = (mainWindow) => {
 	// 本地调试时打开 使用本地文件服务器
-	// autoUpdater.setFeedURL('http://localhost:8882/')
+	autoUpdater.setFeedURL('http://localhost:8882/')
 	autoUpdater.checkForUpdates()
 	autoUpdater.autoDownload = false
 	autoUpdater.autoInstallOnAppQuit = true
@@ -32,7 +32,6 @@ const checkUpdate = (mainWindow) => {
 				}
 			})
 	})
-
 	// 当有可用更新的时候触发。 更新将自动下载。
 	autoUpdater.on('update-available', (info) => {
 		// console.log(info.version)
@@ -55,6 +54,7 @@ const checkUpdate = (mainWindow) => {
 					autoUpdater.downloadUpdate()
 				}
 			})
+		mainWindow.webContents.send('updatePercent', 'info')
 	})
 	//当没有可用更新的时候触发。
 	autoUpdater.on('update-not-available', (info) => {

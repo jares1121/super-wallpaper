@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 17:56:14
  * @LastEditors: jares
- * @LastEditTime: 2024-08-18 00:06:33
+ * @LastEditTime: 2024-08-18 23:49:20
  * @Description:
  *
  * Copyright (c) 2022 by jares, All Rights Reserved.
@@ -10,9 +10,8 @@
 
 const path = require('path')
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
-// const checkUpdate = require('./UpdateController');
-const checkUpdate = require('./update')
 const fs = require('fs')
+const checkUpdate = require('./update')
 
 try {
 	require('electron-reloader')(module)
@@ -31,10 +30,11 @@ function createWindow() {
 		frame: false, // 无边框窗口
 		transparent: false, // 窗口透明
 	})
-	mainWindow.loadFile(path.join(__dirname, '/html/set.html'))
+	// mainWindow.loadFile(path.join(__dirname, '/html/update.html'))
 	mainWindow.webContents.openDevTools()
-	// mainWindow.loadURL('http://www.baidu.com')
+	mainWindow.loadURL('http://www.baidu.com')
 	module.exports = { mainWindow }
+
 }
 
 Object.defineProperty(app, 'isPackaged', {
@@ -71,15 +71,16 @@ ipcMain.on('set', (event, message) => {
 	const { setWindow } = require('./modules/setWindow')
 	setWindow()
 })
+// 打开更新面板
+ipcMain.on('update', (event, message) => {
+	const { updateWindow } = require('./update/window')
+	updateWindow()
+})
+// 监听更新按钮
+ipcMain.on('isUpdate', (event, message) => {
+	checkUpdate(mainWindow)
+})
 // 退出
 ipcMain.on('quit', (event, message) => {
 	app.quit()
 })
-// 监听更新按钮
-ipcMain.on('update', (event, message) => {
-	checkUpdate(mainWindow)
-})
-// 双向监听
-// ipcMain.handle('updatePercent', () => {
-// 	return percent
-// })

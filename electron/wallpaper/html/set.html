@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 21:50:27
  * @LastEditors: jares
- * @LastEditTime: 2024-08-18 00:07:54
+ * @LastEditTime: 2024-08-18 23:36:49
  * @Description:
  *
  * Copyright (c) 2022 by jares, All Rights Reserved.
@@ -69,10 +69,12 @@
 	<div id="content"></div>
 </body>
 <script>
-	window.updateApi.updatePercent((value) => {
-		console.log(value);
-		document.getElementById('content').innerText = value;
-	})
+	// window.updateApi.isUpdate()
+
+	// window.updateApi.updatePercent((value) => {
+	// 	console.log(value);
+	// 	document.getElementById('content').innerText = value;
+	// })
 	var path = ''
 	document.getElementById('fileInput').addEventListener('change', (event) => {
 		const fileList = event.target.files; // 文件列表
