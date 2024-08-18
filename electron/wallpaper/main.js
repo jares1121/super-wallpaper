@@ -76,10 +76,7 @@ ipcMain.on('update', (event, message) => {
 	const { updateWindow } = require('./update/window')
 	updateWindow()
 })
-// 监听更新按钮
-ipcMain.on('isUpdate', (event, message) => {
-	checkUpdate(mainWindow)
-})
+
 // 退出
 ipcMain.on('quit', (event, message) => {
 	app.quit()

@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2024-08-17 15:10:34
  * @LastEditors: jares
- * @LastEditTime: 2024-08-18 23:50:21
+ * @LastEditTime: 2024-08-19 00:16:25
  * @Description:
  *
  * Copyright (c) 2024 by jares, All Rights Reserved.
@@ -54,7 +54,7 @@ const checkUpdate = (mainWindow) => {
 					autoUpdater.downloadUpdate()
 				}
 			})
-		mainWindow.webContents.send('updatePercent', 'info')
+		mainWindow.webContents.send('updateInfo', info)
 	})
 	//当没有可用更新的时候触发。
 	autoUpdater.on('update-not-available', (info) => {

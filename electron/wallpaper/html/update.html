@@ -36,7 +36,7 @@
 	// 更新详细信息
 	window.updateApi.updateInfo((value) => {
 		console.log(value);
-		document.getElementById('content').innerText = 11;
+		document.getElementById('content').innerText = value.version;
 	})
 	// 更新进度
 	window.updateApi.updatePercent((value) => {

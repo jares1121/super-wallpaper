@@ -2,13 +2,15 @@
  * @Author: jares
  * @Date: 2024-08-18 22:37:06
  * @LastEditors: jares
- * @LastEditTime: 2024-08-18 23:09:18
+ * @LastEditTime: 2024-08-19 00:14:13
  * @Description:
  *
  * Copyright (c) 2024 by jares, All Rights Reserved.
  */
 const path = require('path')
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
+const checkUpdate = require('./index.js')
+
 var child
 const updateWindow = () => {
 	child = new BrowserWindow({
@@ -30,6 +32,10 @@ const updateWindow = () => {
 		child.show()
 	})
 }
+// 监听更新按钮
+ipcMain.on('isUpdate', (event, message) => {
+	checkUpdate(child)
+})
 // 关闭窗口
 ipcMain.on('updateClose', (event, message) => {
 	child.close()
