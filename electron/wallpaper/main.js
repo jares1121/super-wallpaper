@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 17:56:14
  * @LastEditors: jares
- * @LastEditTime: 2024-08-18 23:49:20
+ * @LastEditTime: 2024-08-19 11:12:13
  * @Description:
  *
  * Copyright (c) 2022 by jares, All Rights Reserved.
@@ -50,7 +50,7 @@ Object.defineProperty(app, 'isPackaged', {
 // }
 
 app.whenReady().then(() => {
-	createWindow()
+	// createWindow()
 	// app.on('activate', function () {
 	// 	if (BrowserWindow.getAllWindows().length === 0) createWindow()
 	// 	// menu()

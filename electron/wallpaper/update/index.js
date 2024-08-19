@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2024-08-17 15:10:34
  * @LastEditors: jares
- * @LastEditTime: 2024-08-19 00:16:25
+ * @LastEditTime: 2024-08-19 14:18:39
  * @Description:
  *
  * Copyright (c) 2024 by jares, All Rights Reserved.
@@ -13,7 +13,7 @@ const path = require('path')
 
 const checkUpdate = (mainWindow) => {
 	// 本地调试时打开 使用本地文件服务器
-	autoUpdater.setFeedURL('http://localhost:8882/')
+	// autoUpdater.setFeedURL('http://localhost:8882/')
 	autoUpdater.checkForUpdates()
 	autoUpdater.autoDownload = false
 	autoUpdater.autoInstallOnAppQuit = true
@@ -67,11 +67,12 @@ const checkUpdate = (mainWindow) => {
 	})
 	// 错误
 	autoUpdater.on('error', (err) => {
+		console.log(err);
 		dialog
 			.showMessageBox({
 				type: 'info',
 				title: '更新',
-				message: '错误',
+				message: JSON.stringify(err),
 				buttons: ['是', '否']
 			})
 			.then((result) => {})
