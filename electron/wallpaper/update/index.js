@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2024-08-17 15:10:34
  * @LastEditors: jares
- * @LastEditTime: 2024-08-19 14:18:39
+ * @LastEditTime: 2024-08-19 22:57:19
  * @Description:
  *
  * Copyright (c) 2024 by jares, All Rights Reserved.
@@ -13,7 +13,7 @@ const path = require('path')
 
 const checkUpdate = (mainWindow) => {
 	// 本地调试时打开 使用本地文件服务器
-	// autoUpdater.setFeedURL('http://localhost:8882/')
+	autoUpdater.setFeedURL('http://localhost:8882/')
 	autoUpdater.checkForUpdates()
 	autoUpdater.autoDownload = false
 	autoUpdater.autoInstallOnAppQuit = true
@@ -41,19 +41,19 @@ const checkUpdate = (mainWindow) => {
 		// 	title: '对象信息'
 		// })
 		// 当有新版本可用时，弹窗提示用户
-		dialog
-			.showMessageBox({
-				type: 'info',
-				title: '新版本可用',
-				message: '有一个可用的新版本，要更新吗',
-				buttons: ['是', '否']
-			})
-			.then((result) => {
-				if (result.response === 0) {
-					// 用户选择更新，触发下载和安装
-					autoUpdater.downloadUpdate()
-				}
-			})
+		// dialog
+		// 	.showMessageBox({
+		// 		type: 'info',
+		// 		title: '新版本可用',
+		// 		message: '有一个可用的新版本，要更新吗',
+		// 		buttons: ['是', '否']
+		// 	})
+		// 	.then((result) => {
+		// 		if (result.response === 0) {
+		// 			// 用户选择更新，触发下载和安装
+		// 			autoUpdater.downloadUpdate()
+		// 		}
+		// 	})
 		mainWindow.webContents.send('updateInfo', info)
 	})
 	//当没有可用更新的时候触发。
@@ -67,7 +67,7 @@ const checkUpdate = (mainWindow) => {
 	})
 	// 错误
 	autoUpdater.on('error', (err) => {
-		console.log(err);
+		console.log(err)
 		dialog
 			.showMessageBox({
 				type: 'info',
@@ -99,4 +99,8 @@ const checkUpdate = (mainWindow) => {
 		mainWindow.webContents.send('updatePercent', percent)
 	})
 }
-module.exports = checkUpdate
+// 下载
+const download = () => {
+	autoUpdater.downloadUpdate()
+}
+module.exports = { checkUpdate, download }

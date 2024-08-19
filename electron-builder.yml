@@ -11,5 +11,5 @@ publish:
   provider: github
   owner: 'jares1121'
   repo: 'super-wallpaper'
-  token: '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'
+  # token: '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' # 注释后正式版可以检查更新
   releaseType: 'release'

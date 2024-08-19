@@ -55,5 +55,7 @@ contextBridge.exposeInMainWorld('updateApi', {
 	// 更新进度
 	updatePercent: (callback) =>
 		ipcRenderer.on('updatePercent', (_event, value) => callback(value)),
-	close: (params) => ipcRenderer.send('updateClose', params)
+	close: (params) => ipcRenderer.send('updateClose', params),
+	// 下载
+	download: (params) => ipcRenderer.send('download', params)
 })

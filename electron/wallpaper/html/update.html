@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2023-01-06 10:49:22
  * @LastEditors: jares
- * @LastEditTime: 2024-08-18 23:47:41
+ * @LastEditTime: 2024-08-19 23:03:21
  * @Description:
  *
  * Copyright (c) 2023 by jares, All Rights Reserved.
@@ -14,20 +14,91 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			width: 100vw;
+			height: 100vh;
+			color: #fff;
+			border-radius: 5px;
+			background: rgba(109, 178, 109, 1);
+			box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+			overflow: hidden;
+			-webkit-app-region: drag;
+			-webkit-user-select: none;
+		}
+
+		.header {
+			height: 40px;
+			display: flex;
+			justify-content: right;
+			align-items: center;
+			overflow: hidden;
+		}
+
+		.btn-group {
+			-webkit-app-region: no-drag;
+		}
+
+		.btn-group div {
+			color: rgba(0, 0, 0, 6);
+			margin: 0 10px;
+			float: left;
+			cursor: pointer;
+
+			&:hover {
+				color: rgba(255, 255, 255, 0.8);
+			}
+		}
+
+		.body {
+			padding: 50px;
+			box-sizing: border-box;
+		}
+
+		.icon {
+			width: 12px;
+			height: 12px;
+		}
+
+		h1 {
+			font-weight: normal;
+		}
+
+		.version {
+			font-size: 28px;
+		}
+		.update {
+			-webkit-app-region: no-drag;
+			-webkit-user-select: all;
+		}
+	</style>
 </head>
 
 <body>
-	<div id="header" class="header">
-		<div class="logo"></div>
-		<div class="btn-group">
-			<div id="close" title="关闭">
-				<span class="iconfont icon-close">关闭</span>
+	<div class="container">
+		<div id="header" class="header">
+			<div class="btn-group">
+				<div id="close" title="关闭">
+					<svg t="1724077192805" class="icon" viewBox="0 0 1024 1024" version="1.1"
+						xmlns="http://www.w3.org/2000/svg" p-id="4441" width="256" height="256">
+						<path
+							d="M594.983303 512.554066l411.9697 411.9697a58.304836 58.304836 0 0 1-82.428037 82.428036L512.555267 594.982103 100.585567 1006.951802a58.304836 58.304836 0 0 1-82.428036-82.428036L430.127231 512.554066 18.157531 100.584367A58.304836 58.304836 0 1 1 100.585567 18.156331L512.555267 430.12603 924.524966 18.156331a58.304836 58.304836 0 0 1 82.428037 82.428036L594.983303 512.554066z"
+							fill="#ffffff" p-id="4442"></path>
+					</svg>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div id="content"></div>
-	<div id="body" class="body">
-		<button id="update">更新</button>
+		<div class="body">
+			<h1>发现新版本</h1>
+			<div id="version" class="version"></div>
+			<div id="percent" class="percent"></div>
+			<div id="update" class="update">更新</div>
+		</div>
 	</div>
 </body>
 <script>
@@ -35,60 +106,22 @@
 	window.updateApi.isUpdate()
 	// 更新详细信息
 	window.updateApi.updateInfo((value) => {
-		console.log(value);
-		document.getElementById('content').innerText = value.version;
+		document.getElementById('version').innerText = 'V' + value.version;
 	})
 	// 更新进度
 	window.updateApi.updatePercent((value) => {
-		document.getElementById('content').innerText = value;
+		document.getElementById('percent').innerText = value;
 	})
 	let closeBtn = document.getElementById('close')
 	closeBtn.onclick = () => {
 		window.updateApi.close('关闭')
 	}
+	// 更新
+	let updateBtn = document.getElementById('update')
+	updateBtn.onclick = () => {
+		console.log('下载1');
+		window.updateApi.download()
+	}
 </script>
 
 </html>
-<style>
-	* {
-		margin: 0;
-		padding: 0;
-	}
-
-	.header {
-		height: 60px;
-		-webkit-app-region: drag;
-		-webkit-user-select: none;
-		background-color: rgba(36, 36, 36, 1);
-		border-bottom: 2px solid #a40011;
-		overflow: hidden;
-
-	}
-
-	.logo {
-		width: 160px;
-		height: 40px;
-		margin: 10px;
-		float: left;
-		background-color: red;
-		background: url('https://s2.music.126.net/style/web2/img/frame/topbar.png') no-repeat 0 -15px;
-	}
-
-	.btn-group {
-		margin-top: 20px;
-		float: right;
-		-webkit-app-region: no-drag;
-
-	}
-
-	.btn-group div {
-		color: rgba(255, 255, 255, 0.6);
-		margin: 0 10px;
-		float: left;
-		cursor: pointer;
-
-		&:hover {
-			color: rgba(255, 255, 255, 0.8);
-		}
-	}
-</style>
