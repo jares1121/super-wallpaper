@@ -11,12 +11,12 @@ const path = require('path')
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
 const { checkUpdate, download } = require('./index')
 
-var child = null
+var win = null
 const updateWindow = () => {
-	if (child) {
-		child.hide()
+	if (win) {
+		win.hide()
 	}
-	child = new BrowserWindow({
+	win = new BrowserWindow({
 		// parent: mainWindow,
 		// modal: true,
 		// show: true,
@@ -29,24 +29,23 @@ const updateWindow = () => {
 		frame: false, // 无边框窗口
 		transparent: true // 窗口透明
 	})
-	child.loadFile(path.join(__dirname, '../html/update.html'))
-	child.webContents.openDevTools()
-	child.once('ready-to-show', () => {
-		child.show()
+	win.loadFile(path.join(__dirname, '../html/update.html'))
+	// win.webContents.openDevTools()
+	win.once('ready-to-show', () => {
+		win.show()
 	})
 }
 // 监听更新按钮
 ipcMain.on('isUpdate', (event, message) => {
-	checkUpdate(child)
+	checkUpdate(win)
 })
 // 下载
 ipcMain.on('download', (event, message) => {
-	console.log('下载2')
 	download()
 })
 // 关闭窗口
 ipcMain.on('updateClose', (event, message) => {
-	child.close()
+	win.close()
 })
 module.exports = {
 	updateWindow

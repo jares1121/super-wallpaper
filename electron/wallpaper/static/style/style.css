@@ -22,6 +22,12 @@
 	font-weight: normal;
 	font-style: normal;
 }
+@font-face {
+	font-family: 'BAHNSCHRIFT';
+	src: url('../font/BAHNSCHRIFT.TTF');
+	font-weight: normal;
+	font-style: normal;
+}
 body {
 	font-family: 'PingFang-SC-Regular';
 }
