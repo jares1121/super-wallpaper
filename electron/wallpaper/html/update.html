@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2023-01-06 10:49:22
  * @LastEditors: jares
- * @LastEditTime: 2024-08-21 11:32:02
+ * @LastEditTime: 2024-08-21 13:42:12
  * @Description:
  *
  * Copyright (c) 2023 by jares, All Rights Reserved.
@@ -21,11 +21,17 @@
 			height: 100vh;
 			color: #fff;
 			border-radius: 5px;
-			background: rgba(109, 178, 109, 1);
 			box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 			overflow: hidden;
 			-webkit-app-region: drag;
 			-webkit-user-select: none;
+			background: rgba(255, 255, 255, 1);
+
+		}
+
+		.box {
+			height: calc(100% - 100px);
+			background: rgba(109, 178, 109, 1);
 		}
 
 		.header {
@@ -51,11 +57,6 @@
 			}
 		}
 
-		.body {
-			padding: 50px;
-			box-sizing: border-box;
-		}
-
 		.icon {
 			width: 12px;
 			height: 12px;
@@ -72,50 +73,68 @@
 			/* 设置填充颜色为蓝色 */
 		}
 
-		h1 {
+		.body {
+			padding: 20px 50px;
+			box-sizing: border-box;
+		}
+
+		.body h1 {
 			font-weight: normal;
 		}
 
-		.version {
+		.body .version {
 			font-size: 28px;
+			height: 40px;
+			line-height: 40px;
 		}
 
 		.update {
+			width: 100px;
+			margin: 20px auto;
+			cursor: pointer;
 			-webkit-app-region: no-drag;
 			-webkit-user-select: all;
+		}
+
+		.update span {
+			font-size: 16px;
+			width: 100px;
+			height: 32px;
+			color: #fff;
+			display: block;
+			line-height: 32px;
+			text-align: center;
+			background-color: rgba(109, 178, 109, 1);
+			border-radius: 3px;
 		}
 	</style>
 </head>
 
 <body>
 	<div class="container">
-		<div id="header" class="header">
-			<div class="btn-group">
-				<div id="close" title="关闭">
-					<!-- <svg id="icon" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M594.983303 512.554066l411.9697 411.9697a58.304836 58.304836 0 0 1-82.428037 82.428036L512.555267 594.982103 100.585567 1006.951802a58.304836 58.304836 0 0 1-82.428036-82.428036L430.127231 512.554066 18.157531 100.584367A58.304836 58.304836 0 1 1 100.585567 18.156331L512.555267 430.12603 924.524966 18.156331a58.304836 58.304836 0 0 1 82.428037 82.428036L594.983303 512.554066z">
-						</path>
-					</svg> -->
-					<!-- <svg id="mySVG" width="128" height="128" xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M594.983303 512.554066l411.9697 411.9697a58.304836 58.304836 0 0 1-82.428037 82.428036L512.555267 594.982103 100.585567 1006.951802a58.304836 58.304836 0 0 1-82.428036-82.428036L430.127231 512.554066 18.157531 100.584367A58.304836 58.304836 0 1 1 100.585567 18.156331L512.555267 430.12603 924.524966 18.156331a58.304836 58.304836 0 0 1 82.428037 82.428036L594.983303 512.554066z">
-						</path>
-					</svg> -->
+		<div class="box">
+			<div id="header" class="header">
+				<div class="btn-group">
+					<div id="close" title="关闭">
+						<svg t="1724077192805" id="icon" class="icon" viewBox="0 0 1024 1024" version="1.1"
+							xmlns="http://www.w3.org/2000/svg" p-id="4441" width="256" height="256">
+							<path
+								d="M594.983303 512.554066l411.9697 411.9697a58.304836 58.304836 0 0 1-82.428037 82.428036L512.555267 594.982103 100.585567 1006.951802a58.304836 58.304836 0 0 1-82.428036-82.428036L430.127231 512.554066 18.157531 100.584367A58.304836 58.304836 0 1 1 100.585567 18.156331L512.555267 430.12603 924.524966 18.156331a58.304836 58.304836 0 0 1 82.428037 82.428036L594.983303 512.554066z"
+								fill="#ffffff" p-id="4442"></path>
+						</svg>
+					</div>
 				</div>
-				<svg t="1724077192805" id="icon" class="icon" viewBox="0 0 1024 1024" version="1.1"
-					xmlns="http://www.w3.org/2000/svg" p-id="4441" width="256" height="256">
-					<path
-						d="M594.983303 512.554066l411.9697 411.9697a58.304836 58.304836 0 0 1-82.428037 82.428036L512.555267 594.982103 100.585567 1006.951802a58.304836 58.304836 0 0 1-82.428036-82.428036L430.127231 512.554066 18.157531 100.584367A58.304836 58.304836 0 1 1 100.585567 18.156331L512.555267 430.12603 924.524966 18.156331a58.304836 58.304836 0 0 1 82.428037 82.428036L594.983303 512.554066z"
-						fill="#ffffff" p-id="4442"></path>
-				</svg>
+			</div>
+			<div class="body">
+				<h1>发现新版本</h1>
+				<div id="version" class="version"></div>
+				<div id="percent" class="percent"></div>
 			</div>
 		</div>
-		<div class="body">
-			<h1>发现新版本</h1>
-			<div id="version" class="version"></div>
-			<div id="percent" class="percent"></div>
-			<div id="update" class="update">更新</div>
+		<div id="update" class="update">
+			<span>
+				更新
+			</span>
 		</div>
 	</div>
 </body>
