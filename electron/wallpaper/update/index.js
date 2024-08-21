@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2024-08-17 15:10:34
  * @LastEditors: jares
- * @LastEditTime: 2024-08-19 22:57:19
+ * @LastEditTime: 2024-08-21 14:04:46
  * @Description:
  *
  * Copyright (c) 2024 by jares, All Rights Reserved.
@@ -34,26 +34,6 @@ const checkUpdate = (mainWindow) => {
 	})
 	// 当有可用更新的时候触发。 更新将自动下载。
 	autoUpdater.on('update-available', (info) => {
-		// console.log(info.version)
-		// const objectToShow = { name: 'Electron', version: 'app.getVersion()' }
-		// dialog.showMessageBox(mainWindow, {
-		// 	message: info.version,
-		// 	title: '对象信息'
-		// })
-		// 当有新版本可用时，弹窗提示用户
-		// dialog
-		// 	.showMessageBox({
-		// 		type: 'info',
-		// 		title: '新版本可用',
-		// 		message: '有一个可用的新版本，要更新吗',
-		// 		buttons: ['是', '否']
-		// 	})
-		// 	.then((result) => {
-		// 		if (result.response === 0) {
-		// 			// 用户选择更新，触发下载和安装
-		// 			autoUpdater.downloadUpdate()
-		// 		}
-		// 	})
 		mainWindow.webContents.send('updateInfo', info)
 	})
 	//当没有可用更新的时候触发。
@@ -67,7 +47,6 @@ const checkUpdate = (mainWindow) => {
 	})
 	// 错误
 	autoUpdater.on('error', (err) => {
-		console.log(err)
 		dialog
 			.showMessageBox({
 				type: 'info',
