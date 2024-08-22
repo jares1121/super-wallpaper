@@ -1,6 +1,6 @@
 {
 	"name": "super-wallpaper",
-	"version": "0.0.1",
+	"version": "1.0.0-0",
 	"description": "超级壁纸",
 	"main": "./electron/wallpaper/main.js",
 	"scripts": {
