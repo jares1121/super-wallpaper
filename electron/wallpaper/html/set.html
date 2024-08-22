@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 21:50:27
  * @LastEditors: jares
- * @LastEditTime: 2024-08-21 23:38:23
+ * @LastEditTime: 2024-08-22 14:20:54
  * @Description:
  *
  * Copyright (c) 2022 by jares, All Rights Reserved.
@@ -32,8 +32,6 @@
 		.container .box {
 			height: 100%;
 			background: rgba(109, 178, 109, 1);
-			padding: 50px;
-			box-sizing: border-box;
 		}
 
 		.container ul {
@@ -53,43 +51,159 @@
 			color: #fff;
 			background-color: rgba(255, 255, 255, 0.2);
 		}
+
+		.header {
+			height: 40px;
+			display: flex;
+			justify-content: right;
+			align-items: center;
+			overflow: hidden;
+			-webkit-app-region: drag;
+			-webkit-user-select: none;
+		}
+
+		.btn-group {
+			-webkit-app-region: no-drag;
+		}
+
+		.btn-group div {
+			color: rgba(0, 0, 0, 6);
+			margin: 0 10px;
+			float: left;
+			cursor: pointer;
+
+			&:hover {
+				color: rgba(255, 255, 255, 0.8);
+			}
+		}
+
+		.icon {
+			width: 12px;
+			height: 12px;
+			cursor: pointer;
+		}
+
+		.icon path {
+			fill: rgba(255, 255, 255, 1);
+			/* 设置填充颜色为蓝色 */
+		}
+
+		.icon:hover path {
+			fill: rgba(255, 255, 255, 0.5);
+			/* 设置填充颜色为蓝色 */
+		}
+
+		.body {
+			padding: 20px;
+			box-sizing: border-box
+		}
+
+		.body .body-box {
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+		}
+
+		.body .body-box .local .btn {
+			font-size: 12px;
+			width: 60px;
+			height: 30px;
+			text-align: center;
+			line-height: 30px;
+			background-color: #409eff;
+			border-radius: 3px;
+			cursor: pointer;
+			position: relative;
+		}
+
+		.body .body-box .local input {
+			opacity: 0;
+		}
+
+		.body .body-box .local span {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		.body .body-box .network {
+			display: flex;
+			gap: 20px;
+		}
+
+		.body .body-box .network input {
+			width: 200px;
+			height: 30px;
+			border: 1px solid #409eff;
+			border-radius: 3px;
+			padding-left: 10px;
+			outline: none;
+		}
+
+		.body .body-box .network .btn {
+			font-size: 12px;
+			width: 60px;
+			height: 30px;
+			text-align: center;
+			line-height: 30px;
+			background-color: #409eff;
+			border-radius: 3px;
+			cursor: pointer;
+			position: relative;
+		}
 	</style>
 </head>
 
 <body>
 	<div class="container">
 		<div class="box">
-			<h1>设置</h1>
-			<input type="text" id="network" />
-			<input type="file" value="" id="fileInput" />
-			<button id="btnLocal">设置本地</button>
-			<button id="btnNetwork">设置网络</button>
-			<img src="" />
-			<div id="content"></div>
+			<div id="header" class="header">
+				<div class="btn-group">
+					<div id="close" title="关闭">
+						<svg t="1724077192805" id="icon" class="icon" viewBox="0 0 1024 1024" version="1.1"
+							xmlns="http://www.w3.org/2000/svg" p-id="4441" width="256" height="256">
+							<path
+								d="M594.983303 512.554066l411.9697 411.9697a58.304836 58.304836 0 0 1-82.428037 82.428036L512.555267 594.982103 100.585567 1006.951802a58.304836 58.304836 0 0 1-82.428036-82.428036L430.127231 512.554066 18.157531 100.584367A58.304836 58.304836 0 1 1 100.585567 18.156331L512.555267 430.12603 924.524966 18.156331a58.304836 58.304836 0 0 1 82.428037 82.428036L594.983303 512.554066z"
+								fill="#ffffff" p-id="4442"></path>
+						</svg>
+					</div>
+				</div>
+			</div>
+			<div class="body">
+				<h1>设置</h1>
+				<div class="body-box">
+					<div class="local">
+						<div class="btn" id="btnLocal">
+							<input type="file" value="" id="fileInput" />
+							<span>
+								选择文件
+							</span>
+						</div>
+					</div>
+					<div class="network">
+						<input type="text" id="network" />
+						<div class="btn" id="btnNetwork">设置网络</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
 <script>
-	// window.updateApi.isUpdate()
-
-	// window.updateApi.updatePercent((value) => {
-	// 	console.log(value);
-	// 	document.getElementById('content').innerText = value;
-	// })
 	var path = ''
-	document.getElementById('fileInput').addEventListener('change', (event) => {
-		const fileList = event.target.files; // 文件列表
-		if (fileList.length > 0) {
-			// 获取第一个文件的实际路径
-			path = fileList[0].path;
-		}
-	});
 	let btnLocal = document.getElementById('btnLocal')
 	btnLocal.onclick = () => {
-		// window.trayAPI.get()
-		// type 0 本地 1网络
-		let type = 0
-		window.trayAPI.setPaper({url: path, type: type})
+		document.getElementById('fileInput').addEventListener('change', (event) => {
+			const fileList = event.target.files; // 文件列表
+			if (fileList.length > 0) {
+				// 获取第一个文件的实际路径
+				path = fileList[0].path;
+				window.trayAPI.setPaper({url: path, type: 0})
+
+			}
+		});
 	}
 	let btnNetwork = document.getElementById('btnNetwork')
 	btnNetwork.onclick = () => {
@@ -98,6 +212,11 @@
 		let type = 1
 		var network = document.getElementById('network').value
 		window.trayAPI.setPaper({url: network, type: type})
+	}
+	// 关闭
+	let closeBtn = document.getElementById('close')
+	closeBtn.onclick = () => {
+		window.trayAPI.setClose('关闭')
 	}
 </script>
 

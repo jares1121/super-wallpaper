@@ -31,6 +31,17 @@
 		.box {
 			height: calc(100% - 72px);
 			background: rgba(109, 178, 109, 1);
+			/* background-filter: blur(50px);
+			background: linear-gradient(90deg,
+					rgba(255, 0, 0, 0.3),
+					rgba(255, 165, 0, 0.3),
+					rgba(255, 255, 0, 0.3),
+					rgba(0, 128, 0, 0.3),
+					rgba(0, 0, 255, 0.3),
+					rgba(75, 0, 130, 0.3),
+					rgba(238, 130, 238, 0.3)); */
+			/* background: linear-gradient(135deg, #1afbf0, #da00ff); */
+
 		}
 
 		.header {
@@ -164,16 +175,16 @@
 	// 更新进度
 	window.updateApi.updatePercent((value) => {
 		document.getElementById('bg').style.width = value + '%'
-		// document.getElementById('percent').innerText = value;
 	})
-	let closeBtn = document.getElementById('close')
-	closeBtn.onclick = () => {
-		window.updateApi.close('关闭')
-	}
-	// 更新
+	// 开始更新
 	let updateBtn = document.getElementById('update')
 	updateBtn.onclick = () => {
 		window.updateApi.download()
+	}
+	// 关闭
+	let closeBtn = document.getElementById('close')
+	closeBtn.onclick = () => {
+		window.updateApi.close('关闭')
 	}
 </script>
 
