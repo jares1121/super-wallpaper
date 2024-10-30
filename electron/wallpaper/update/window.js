@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2024-08-18 22:37:06
  * @LastEditors: jares
- * @LastEditTime: 2024-08-19 23:03:56
+ * @LastEditTime: 2024-10-30 23:35:23
  * @Description:
  *
  * Copyright (c) 2024 by jares, All Rights Reserved.
@@ -13,9 +13,6 @@ const { checkUpdate, download } = require('./index')
 
 var win = null
 const updateWindow = () => {
-	if (win) {
-		win.hide()
-	}
 	win = new BrowserWindow({
 		// parent: mainWindow,
 		// modal: true,
