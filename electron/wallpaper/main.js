@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 17:56:14
  * @LastEditors: jares
- * @LastEditTime: 2024-08-19 11:12:13
+ * @LastEditTime: 2025-06-24 10:01:42
  * @Description:
  *
  * Copyright (c) 2022 by jares, All Rights Reserved.
@@ -62,6 +62,12 @@ app.whenReady().then(() => {
 // 设置壁纸
 ipcMain.on('setPaper', async (event, message) => {
 	const { init } = require('./modules/setPaper')
+	init(message)
+	// event.reply('message-from-main', await init(message)) // 向渲染进程发送消息
+})
+// 获取数据
+ipcMain.on('getData', async (event, message) => {
+	const { init } = require('./modules/getData')
 	init(message)
 	// event.reply('message-from-main', await init(message)) // 向渲染进程发送消息
 })

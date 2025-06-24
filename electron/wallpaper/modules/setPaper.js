@@ -55,5 +55,6 @@ function setNetwork(url) {
 	}, 1000)
 }
 module.exports = {
-	init
+	init,
+	setNetwork
 }
