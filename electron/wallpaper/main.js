@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 17:56:14
  * @LastEditors: jares
- * @LastEditTime: 2025-06-24 10:01:42
+ * @LastEditTime: 2025-06-24 15:32:29
  * @Description:
  *
  * Copyright (c) 2022 by jares, All Rights Reserved.
@@ -74,6 +74,11 @@ ipcMain.on('getData', async (event, message) => {
 // 打开设置面板
 ipcMain.on('set', (event, message) => {
 	const { setWindow } = require('./modules/setWindow')
+	setWindow()
+})
+// 打开主页
+ipcMain.on('home', (event, message) => {
+	const { setWindow } = require('./modules/homeWindow')
 	setWindow()
 })
 // 打开更新面板

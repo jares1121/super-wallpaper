@@ -50,6 +50,7 @@
 <body>
 	<div class="container">
 		<ul>
+			<li id="home">主页</li>
 			<li id="set">设置</li>
 			<li id="update">更新</li>
 			<li id="quit">退出</li>
@@ -57,8 +58,8 @@
 	</div>
 </body>
 <script>
-	function quitFun() {
-		window.trayAPI.quit()
+	function homeFun() {
+		window.trayAPI.home()
 	}
 	function setFun() {
 		window.trayAPI.set()
@@ -66,13 +67,18 @@
 	function updateFun() {
 		window.updateApi.update()
 	}
+	function quitFun() {
+		window.trayAPI.quit()
+	}
 
+	let home = document.getElementById('home')
 	let set = document.getElementById('set')
-	let quit = document.getElementById('quit')
 	let update = document.getElementById('update')
+	let quit = document.getElementById('quit')
+	home.onclick = homeFun
 	set.onclick = setFun
-	quit.onclick = quitFun
 	update.onclick = updateFun
+	quit.onclick = quitFun
 </script>
 
 </html>

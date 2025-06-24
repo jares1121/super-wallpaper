@@ -33,6 +33,7 @@ contextBridge.exposeInMainWorld('musicAPI', {
 	play: (params) => ipcRenderer.send('musicPlay', params)
 })
 contextBridge.exposeInMainWorld('trayAPI', {
+	home: (params) => ipcRenderer.send('home', params),
 	// 退出
 	quit: (params) => ipcRenderer.send('quit', params),
 	// get: (params) =>  ipcRenderer.on('message-from-main', (event, arg) => {
