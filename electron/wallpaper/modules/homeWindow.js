@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2024-08-06 22:13:22
  * @LastEditors: jares
- * @LastEditTime: 2025-06-24 14:48:04
+ * @LastEditTime: 2025-06-26 16:35:32
  * @Description: 
  * 
  * Copyright (c) 2024 by jares, All Rights Reserved. 
@@ -21,10 +21,11 @@ const setWindow = () => {
 		webPreferences: {
 			preload: path.join(__dirname, '../preload.js')
 		},
-		frame: false, // 无边框窗口
+		frame: true, // 无边框窗口
 		transparent: true // 窗口透明
 	})
-	win.loadFile(path.join(__dirname, '../html/home.html'))
+	win.loadURL('http://www.baidu.com')
+	// win.loadFile(path.join(__dirname, '../html/home.html'))
 	// win.webContents.openDevTools()
 	win.once('ready-to-show', () => {
 		win.show()

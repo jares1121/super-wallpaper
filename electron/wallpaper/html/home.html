@@ -1,3 +1,12 @@
+<!--
+ * @Author: jares
+ * @Date: 2025-06-24 14:30:11
+ * @LastEditors: jares
+ * @LastEditTime: 2025-06-26 16:36:32
+ * @Description: 
+ * 
+ * Copyright (c) 2025 by jares, All Rights Reserved. 
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,17 +21,31 @@
 			box-sizing: border-box;
 		}
 
+		.list {
+			padding: 10px;
+			background-color: #fff;
+		}
+
 		ul {
+			display: flex;
+			flex-wrap: wrap;
 			list-style: none;
+			overflow: hidden;
+			gap: 20px;
 		}
 
 		li {
-			display: inline-block;
-			width: 200px;
-			height: 200px;
-			margin: 10px;
+			display: flex;
+			flex: 1 1 calc(25% - 20px);
+			/* 三列计算，考虑gap */
+			max-width: calc(25% - 15px);
+			/* 最小宽度，防止过小 */
 			border-radius: 10px;
 			overflow: hidden;
+		}
+
+		li img {
+			width: 100%;
 		}
 	</style>
 </head>
@@ -60,6 +83,206 @@
 			</li>
 			<li>
 				<img src="https://www.bing.com/th?id=OHR.CumberlandOaks_ZH-CN7265906780_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
+					onclick="setPaper(this)">
+			</li>
+			<li>
+				<img src="https://www.bing.com/th?id=OHR.AmazonEcuador_ZH-CN2864991745_UHD.jpg" alt=""
 					onclick="setPaper(this)">
 			</li>
 			<li>
