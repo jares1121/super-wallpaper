@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2024-06-09 15:35:02
  * @LastEditors: jares
- * @LastEditTime: 2024-08-08 14:51:07
+ * @LastEditTime: 2025-06-27 15:33:47
  * @Description:
  *
  * Copyright (c) 2024 by jares, All Rights Reserved.
@@ -18,10 +18,11 @@ function getImg(url) {
 			console.log(err)
 		}
 	})
-	var img_filename = 'mu.jpg'
-	let _path = './static/' + img_filename
+	var img_filename = 'action.jpg'
+	let _path = '../static/wallpaper/' + img_filename
+	let u = path.join(__dirname, _path)
 	//通过流的方式，把图片写到本地/image目录下，并用新闻的标题和图片的标题作为图片的名称。
-	request(url).pipe(fs.createWriteStream(_path))
+	request(url).pipe(fs.createWriteStream(u))
 	return _path
 }
 // 设置壁纸
@@ -38,18 +39,20 @@ async function init(obj) {
 }
 // 设置本地图片
 function setLocal(url) {
-	let _default = path.join(
-		process.resourcesPath,
-		'/static/wallpaper/default.jpg'
-	)
-	let filePath = url || _default
+	// let _default = path.join(
+	// 	process.resourcesPath,
+	// 	'/static/wallpaper/default.jpg'
+	// )
+	let _default = path.join(__dirname, '../static/wallpaper/default.jpg')
+	console.log(_default)
+	let filePath = _default
 	console.log(url, 'url')
 
 	wallpaper.set(filePath)
 }
 // 设置网络图片
 function setNetwork(url) {
-	let u = path.join(__dirname, '../../../' + getImg(url))
+	let u = path.join(__dirname, getImg(url))
 	setTimeout(() => {
 		wallpaper.set(u)
 	}, 1000)
