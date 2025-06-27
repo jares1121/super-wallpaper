@@ -22,11 +22,11 @@ window.addEventListener('DOMContentLoaded', () => {
 contextBridge.exposeInMainWorld('electronAPI', {
 	// platform: os.platform(),
 	electron: () => process,
-	maximize: (params) => ipcRenderer.send('maximize', params),
-	unmaximize: (params) => ipcRenderer.send('unmaximize', params),
-	minimize: (params) => ipcRenderer.send('minimize', params),
+	maximize: (params) => ipcRenderer.send('window-action', 'maximize', params),
+	minimize: (params) => ipcRenderer.send('window-action', 'minimize', params),
+	toggle: (params) => ipcRenderer.send('window-action', 'toggle', params),
+	close: (params) => ipcRenderer.send('window-action', 'close', params),
 	restore: (params) => ipcRenderer.send('restore', params),
-	close: (params) => ipcRenderer.send('close', params),
 	reset: (params) => ipcRenderer.send('reset', params)
 })
 contextBridge.exposeInMainWorld('musicAPI', {
@@ -43,9 +43,7 @@ contextBridge.exposeInMainWorld('trayAPI', {
 	set: (params) => ipcRenderer.send('set', params),
 	setClose: (params) => ipcRenderer.send('setClose', params),
 	// 设置壁纸
-	setPaper: (params) => ipcRenderer.send('setPaper', params),
-	// 获取数据
-	getData: (params) => ipcRenderer.send('getData', params)
+	setPaper: (params) => ipcRenderer.send('setPaper', params)
 })
 // 更新
 contextBridge.exposeInMainWorld('updateApi', {

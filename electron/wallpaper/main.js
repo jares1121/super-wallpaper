@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2022-12-28 17:56:14
  * @LastEditors: jares
- * @LastEditTime: 2025-06-24 15:32:29
+ * @LastEditTime: 2025-06-27 14:51:53
  * @Description:
  *
  * Copyright (c) 2022 by jares, All Rights Reserved.
@@ -22,18 +22,17 @@ function createWindow() {
 		height: 800,
 		icon: path.join(__dirname, './static/images/icon.png'),
 		webPreferences: {
-			preload: path.join(__dirname, './preload.js'),
+			preload: path.join(__dirname, './preload.js')
 			// nodeIntegration: true, // 改为true 即可
 			// contextIsolation: false,
 		},
 		frame: false, // 无边框窗口
-		transparent: false, // 窗口透明
+		transparent: false // 窗口透明
 	})
 	// mainWindow.loadFile(path.join(__dirname, '/html/update.html'))
 	mainWindow.webContents.openDevTools()
 	mainWindow.loadURL('http://www.baidu.com')
 	module.exports = { mainWindow }
-
 }
 
 Object.defineProperty(app, 'isPackaged', {
@@ -65,20 +64,14 @@ ipcMain.on('setPaper', async (event, message) => {
 	init(message)
 	// event.reply('message-from-main', await init(message)) // 向渲染进程发送消息
 })
-// 获取数据
-ipcMain.on('getData', async (event, message) => {
-	const { init } = require('./modules/getData')
-	init(message)
-	// event.reply('message-from-main', await init(message)) // 向渲染进程发送消息
-})
 // 打开设置面板
 ipcMain.on('set', (event, message) => {
-	const { setWindow } = require('./modules/setWindow')
+	const { setWindow } = require('./windows/set')
 	setWindow()
 })
 // 打开主页
 ipcMain.on('home', (event, message) => {
-	const { setWindow } = require('./modules/homeWindow')
+	const { setWindow } = require('./windows/home')
 	setWindow()
 })
 // 打开更新面板
@@ -90,4 +83,27 @@ ipcMain.on('update', (event, message) => {
 // 退出
 ipcMain.on('quit', (event, message) => {
 	app.quit()
+})
+
+// ✅ 更简单的统一控制窗口行为
+ipcMain.on('window-action', (event, action) => {
+	const win = BrowserWindow.fromWebContents(event.sender)
+	if (!win) return
+	switch (action) {
+		case 'minimize':
+			win.minimize()
+			break
+		case 'maximize':
+			win.maximize()
+			break
+		case 'unmaximize':
+			win.unmaximize()
+			break
+		case 'toggle':
+			win.isMaximized() ? win.unmaximize() : win.maximize()
+			break
+		case 'close':
+			win.close()
+			break
+	}
 })

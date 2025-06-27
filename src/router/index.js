@@ -12,7 +12,7 @@ import { createRouter, createWebHistory,  } from 'vue-router'
 // 定义路由规则
 const routes  = [
 	{
-		path: '/',
+		path: '/home',
 		name: 'Home',
 		component: () => import('@/views/home/index.vue')
 	}

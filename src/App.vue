@@ -8,16 +8,14 @@
  * Copyright (c) 2025 by jares, All Rights Reserved. 
 -->
 <template>
-	<div class="container">
-		<router-view />
-	</div>
+	<Layout></Layout>
 </template>
 <script setup>
-	import { onMounted, ref } from 'vue'
+	import Layout from '@/layout/index.vue'
 </script>
 <style scoped>
-.container {
-	width: 100vw;
-	height: 100vh;
-}
+	.container {
+		width: 100vw;
+		height: 100vh;
+	}
 </style>

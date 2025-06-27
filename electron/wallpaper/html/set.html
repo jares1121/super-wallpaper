@@ -193,9 +193,6 @@
 						<input type="text" id="network" />
 						<div class="btn" id="btnNetwork">设置网络</div>
 					</div>
-					<div class="network">
-						<div class="btn" id="getData">获取数据</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -223,13 +220,6 @@
 		var network = document.getElementById('network').value
 		window.trayAPI.setPaper({url: network, type: type})
 	}
-	let btnGetData = document.getElementById('getData')
-	btnGetData.onclick = () => {
-		// window.trayAPI.get()
-		// type 0 本地 1网络
-		window.trayAPI.getData({})
-	}
-
 	// 关闭
 	let closeBtn = document.getElementById('close')
 	closeBtn.onclick = () => {
