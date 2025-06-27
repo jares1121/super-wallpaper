@@ -55,12 +55,8 @@
 </script>
 
 <style lang="scss" scoped>
-	.home {
-		width: 100vw;
-		height: 100vh;
-	}
 	.list {
-		padding: 10px;
+		padding: 20px;
 		ul {
 			display: flex;
 			flex-wrap: wrap;

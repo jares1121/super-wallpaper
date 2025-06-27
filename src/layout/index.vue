@@ -2,7 +2,7 @@
  * @Author: jares
  * @Date: 2023-01-04 09:30:59
  * @LastEditors: jares
- * @LastEditTime: 2025-06-27 14:47:45
+ * @LastEditTime: 2025-06-27 15:44:06
  * @Description:
  *
  * Copyright (c) 2023 by jares, All Rights Reserved.
@@ -26,8 +26,10 @@
 </script>
 <style lang="scss" scoped>
 	.container {
+		height: 100%;
 		display: flex;
 		flex-direction: column;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 	}
 	.main {
 		flex: 1;

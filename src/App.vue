@@ -14,8 +14,4 @@
 	import Layout from '@/layout/index.vue'
 </script>
 <style scoped>
-	.container {
-		width: 100vw;
-		height: 100vh;
-	}
 </style>
