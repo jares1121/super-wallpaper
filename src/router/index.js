@@ -10,11 +10,16 @@
 import { createRouter, createWebHistory,  } from 'vue-router'
 
 // 定义路由规则
-const routes  = [
+const routes = [
 	{
 		path: '/home',
 		name: 'Home',
 		component: () => import('@/views/home/index.vue')
+	},
+	{
+		path: '/custom',
+		name: 'custom',
+		component: () => import('@/views/custom/index.vue')
 	}
 ]
 
