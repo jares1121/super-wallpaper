@@ -3,7 +3,7 @@
  * @Date: 2025-06-27 17:06:56
  * @LastEditors: jares
  * @LastEditTime: 2025-06-27 17:50:50
- * @Description: 
+ * @Description: 设置面板（本地图片 / 网络图片 / 自定义水印文字）
  * 
  * Copyright (c) 2025 by jares, All Rights Reserved. 
 -->
@@ -34,166 +34,276 @@
 				</div>
 			</div>
 			<div class="body">
-				<h1>设置</h1>
-				<div class="body-box">
+				<h1>壁纸设置</h1>
+
+				<!-- 文字水印 -->
+				<div class="section">
+					<label class="label">水印文字</label>
+					<input
+						type="text"
+						id="watermark"
+						class="input"
+						v-model="watermark"
+						placeholder="留空则使用默认文字"
+					/>
+					<label class="checkbox">
+						<input type="checkbox" v-model="enableWatermark" />
+						<span>启用水印</span>
+					</label>
+				</div>
+
+				<!-- 本地图片 -->
+				<div class="section">
 					<div class="local">
 						<div class="btn" id="btnLocal" @click="btnLocal">
 							<input type="file" value="" id="fileInput" />
-							<span> 选择文件 </span>
+							<span>选择本地图片</span>
 						</div>
+						<span class="file-name" v-if="localPath">{{ localPath }}</span>
 					</div>
+				</div>
+
+				<!-- 网络图片 -->
+				<div class="section">
 					<div class="network">
-						<input type="text" id="network" />
+						<input
+							type="text"
+							id="network"
+							class="input"
+							v-model="networkUrl"
+							placeholder="图片 URL (https://...)"
+						/>
 						<div class="btn" id="btnNetwork" @click="btnNetwork">
-							设置网络
+							设置网络图片
 						</div>
 					</div>
 				</div>
+
+				<!-- 状态提示 -->
+				<div class="status" v-if="status">{{ status }}</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script setup>
-	// 这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
-	// 例如：import 《组件名称》 from '《组件路径》';
-	import { ref, reactive } from 'vue'
-	const path = ref('') // 存储文件路径
-	const btnLocal = () => {
-		document
-			.getElementById('fileInput')
-			.addEventListener('change', (event) => {
-				const fileList = event.target.files // 文件列表
-				if (fileList.length > 0) {
-					// 获取第一个文件的实际路径
-					path.value = fileList[0].path
-					window.trayAPI.setPaper({ url: path.value, type: 0 })
-				}
-			})
+import { ref } from 'vue'
+
+// 状态
+const watermark = ref('')
+const enableWatermark = ref(true)
+const localPath = ref('')
+const networkUrl = ref('')
+const status = ref('')
+
+/** 组装传给主进程的参数：统一加上 text */
+function buildParams(url, type) {
+	return {
+		url,
+		type,
+		text: enableWatermark.value ? watermark.value || '你的自定义文字' : ''
 	}
-	const btnNetwork = () => {
-		// window.trayAPI.get()
-		// type 0 本地 1网络
-		let type = 1
-		var network = document.getElementById('network').value
-		window.trayAPI.setPaper({ url: network, type: type })
+}
+
+function btnLocal() {
+	const input = document.getElementById('fileInput')
+	if (!input) return
+	input.value = '' // 允许重复选同一个文件
+	input.onchange = (event) => {
+		const fileList = event.target.files
+		if (fileList && fileList.length > 0) {
+			localPath.value = fileList[0].path
+			const params = buildParams(localPath.value, 0)
+			status.value = '正在设置本地图片...'
+			window.trayAPI.setPaper(params)
+			setTimeout(() => (status.value = ''), 2000)
+		}
 	}
-	const close = () => {
-		window.trayAPI.setClose('关闭')
+	input.click()
+}
+
+function btnNetwork() {
+	if (!networkUrl.value.trim()) {
+		status.value = '请先填写图片 URL'
+		return
 	}
+	const params = buildParams(networkUrl.value.trim(), 1)
+	status.value = '正在下载网络图片并设置...'
+	window.trayAPI.setPaper(params)
+	setTimeout(() => (status.value = ''), 3000)
+}
+
+function close() {
+	window.trayAPI.setClose('关闭')
+}
 </script>
 
 <style lang="scss" scoped>
-	.custom {
-		width: 100%;
+.custom {
+	width: 100%;
+	height: 100%;
+	color: #fff;
+	border-radius: 5px;
+	overflow: hidden;
+	background: rgba(30, 30, 40, 0.95);
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	.box {
 		height: 100%;
-		color: #fff;
-		border-radius: 5px;
-		overflow: hidden;
-		background: rgba(255, 255, 255, 1);
-		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-		/* -webkit-app-region: drag;
-			-webkit-user-select: none; */
-		.box {
-			height: 100%;
-			background: rgba(109, 178, 109, 1);
-			.header {
-				height: 40px;
-				display: flex;
-				justify-content: right;
-				align-items: center;
-				overflow: hidden;
-				-webkit-app-region: drag;
-				-webkit-user-select: none;
-				.btn-group {
-					-webkit-app-region: no-drag;
-					div {
-						color: rgba(0, 0, 0, 6);
-						margin: 0 10px;
-						float: left;
-						cursor: pointer;
-
-						&:hover {
-							color: rgba(255, 255, 255, 0.8);
-						}
-					}
-					.icon {
-						width: 12px;
-						height: 12px;
-						cursor: pointer;
-						path {
-							fill: rgba(255, 255, 255, 1);
-							/* 设置填充颜色为蓝色 */
-						}
-						&:hover path {
-							fill: rgba(255, 255, 255, 0.5);
-							/* 设置填充颜色为蓝色 */
-						}
+		background: linear-gradient(135deg, #1e3a5f 0%, #2d5a3d 100%);
+		display: flex;
+		flex-direction: column;
+		.header {
+			height: 40px;
+			display: flex;
+			justify-content: right;
+			align-items: center;
+			overflow: hidden;
+			-webkit-app-region: drag;
+			.btn-group {
+				-webkit-app-region: no-drag;
+				div {
+					color: rgba(255, 255, 255, 0.6);
+					margin: 0 10px;
+					float: left;
+					cursor: pointer;
+					&:hover {
+						color: #fff;
 					}
 				}
-			}
-			.body {
-				padding: 20px;
-				box-sizing: border-box;
-				.body-box {
-					display: flex;
-					flex-direction: column;
-					gap: 20px;
-					.local {
-						.btn {
-							font-size: 12px;
-							width: 60px;
-							height: 30px;
-							text-align: center;
-							line-height: 30px;
-							background-color: #409eff;
-							border-radius: 3px;
-							cursor: pointer;
-							position: relative;
-						}
-						input {
-							width: 100%;
-							height: 100%;
-							display: block;
-							opacity: 0;
-							position: relative;
-							z-index: 1;
-							cursor: pointer;
-						}
-						span {
-							width: 100%;
-							height: 100%;
-							position: absolute;
-							top: 0;
-							left: 0;
-							z-index: 0;
-						}
+				.icon {
+					width: 12px;
+					height: 12px;
+					cursor: pointer;
+					path {
+						fill: rgba(255, 255, 255, 0.6);
 					}
-					.network {
-						display: flex;
-						gap: 20px;
-						input {
-							width: 200px;
-							height: 30px;
-							border: 1px solid #409eff;
-							border-radius: 3px;
-							padding-left: 10px;
-							outline: none;
-						}
-					}
-					.btn {
-						font-size: 12px;
-						width: 60px;
-						height: 30px;
-						text-align: center;
-						line-height: 30px;
-						background-color: #409eff;
-						border-radius: 3px;
-						cursor: pointer;
-						position: relative;
+					&:hover path {
+						fill: #ff6b6b;
 					}
 				}
 			}
 		}
+		.body {
+			flex: 1;
+			padding: 20px;
+			box-sizing: border-box;
+			h1 {
+				margin: 0 0 20px 0;
+				font-size: 18px;
+				font-weight: 600;
+				color: #fff;
+			}
+			.section {
+				margin-bottom: 18px;
+				.label {
+					display: block;
+					font-size: 13px;
+					color: rgba(255, 255, 255, 0.7);
+					margin-bottom: 6px;
+				}
+				.checkbox {
+					display: flex;
+					align-items: center;
+					gap: 6px;
+					font-size: 12px;
+					color: rgba(255, 255, 255, 0.7);
+					margin-top: 8px;
+					input {
+						accent-color: #409eff;
+					}
+				}
+			}
+			.input {
+				width: 100%;
+				height: 34px;
+				border: 1px solid rgba(64, 158, 255, 0.5);
+				border-radius: 4px;
+				padding: 0 10px;
+				outline: none;
+				background: rgba(255, 255, 255, 0.1);
+				color: #fff;
+				font-size: 13px;
+				box-sizing: border-box;
+				&::placeholder {
+					color: rgba(255, 255, 255, 0.4);
+				}
+				&:focus {
+					border-color: #409eff;
+					background: rgba(255, 255, 255, 0.15);
+				}
+			}
+			.local {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				.btn {
+					font-size: 12px;
+					padding: 0 16px;
+					height: 34px;
+					text-align: center;
+					line-height: 34px;
+					background-color: #409eff;
+					border-radius: 4px;
+					cursor: pointer;
+					position: relative;
+					white-space: nowrap;
+					&:hover {
+						background-color: #66b1ff;
+					}
+					input {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						opacity: 0;
+						cursor: pointer;
+					}
+					span {
+						position: relative;
+						z-index: 0;
+					}
+				}
+				.file-name {
+					font-size: 11px;
+					color: rgba(255, 255, 255, 0.5);
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					max-width: 280px;
+				}
+			}
+			.network {
+				display: flex;
+				gap: 10px;
+				input {
+					flex: 1;
+				}
+				.btn {
+					font-size: 12px;
+					padding: 0 16px;
+					height: 34px;
+					line-height: 34px;
+					text-align: center;
+					background-color: #67c23a;
+					border-radius: 4px;
+					cursor: pointer;
+					white-space: nowrap;
+					&:hover {
+						background-color: #85ce61;
+					}
+				}
+			}
+			.status {
+				margin-top: 14px;
+				padding: 8px 12px;
+				background: rgba(64, 158, 255, 0.2);
+				border-left: 3px solid #409eff;
+				color: rgba(255, 255, 255, 0.9);
+				font-size: 12px;
+				border-radius: 2px;
+			}
+		}
 	}
+}
 </style>

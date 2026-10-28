@@ -22,6 +22,8 @@ window.addEventListener('DOMContentLoaded', () => {
 contextBridge.exposeInMainWorld('electronAPI', {
 	// platform: os.platform(),
 	electron: () => process,
+	// 通用 IPC 发送（供 prompt.html 等小窗口回传数据）
+	send: (channel, data) => ipcRenderer.send(channel, data),
 	maximize: (params) => ipcRenderer.send('window-action', 'maximize', params),
 	minimize: (params) => ipcRenderer.send('window-action', 'minimize', params),
 	toggle: (params) => ipcRenderer.send('window-action', 'toggle', params),
@@ -60,4 +62,11 @@ contextBridge.exposeInMainWorld('updateApi', {
 	close: (params) => ipcRenderer.send('updateClose', params),
 	// 下载
 	download: (params) => ipcRenderer.send('download', params)
+})
+// 动态壁纸引擎
+contextBridge.exposeInMainWorld('wallpaperAPI', {
+	// 开启/关闭动态壁纸
+	toggle: () => ipcRenderer.send('wallpaper:toggle'),
+	// 切换壁纸内容 (URL / 本地 HTML)
+	setContent: (content) => ipcRenderer.send('wallpaper:set-content', content)
 })

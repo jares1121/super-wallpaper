@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Super Wallpaper</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%; overflow: hidden;
+    background: #000;
+    /* 关键：透明 → 让 SetParent 到 WorkerW 后能透出系统底层 */
+    background: transparent;
+  }
+  canvas { display: block; }
+  /* 桌面图标不会盖住我们的 DOM，所以 DOM 里的元素不会被意外交互 */
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<script>
+/**
+ * Demo: 星空粒子 + 星云效果
+ * 作为验证 WorkerW 挂载的第一个动态壁纸
+ */
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+
+let W = 0, H = 0, stars = [], nebulas = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth * devicePixelRatio;
+  H = canvas.height = window.innerHeight * devicePixelRatio;
+  canvas.style.width = window.innerWidth + 'px';
+  canvas.style.height = window.innerHeight + 'px';
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+  // 重新初始化粒子（分辨率变了）
+  initStars();
+  initNebulas();
+}
+
+function initStars() {
+  const count = Math.floor((W / devicePixelRatio) * (H / devicePixelRatio) / 6000);
+  stars = Array.from({ length: count }, () => ({
+    x: Math.random() * (W / devicePixelRatio),
+    y: Math.random() * (H / devicePixelRatio),
+    r: Math.random() * 1.5 + 0.3,
+    speed: Math.random() * 0.05 + 0.01,
+    phase: Math.random() * Math.PI * 2,
+    phaseSpeed: Math.random() * 0.02 + 0.005
+  }));
+}
+
+function initNebulas() {
+  const count = 5;
+  nebulas = Array.from({ length: count }, (_, i) => ({
+    x: Math.random() * (W / devicePixelRatio),
+    y: Math.random() * (H / devicePixelRatio),
+    r: 150 + Math.random() * 250,
+    hue: [210, 280, 320, 180, 50][i % 5],
+    vx: (Math.random() - 0.5) * 0.2,
+    vy: (Math.random() - 0.5) * 0.2
+  }));
+}
+
+// 鼠标位置（未来可交互用）
+let mouseX = -9999, mouseY = -9999;
+window.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX; mouseY = e.clientY;
+});
+
+function draw() {
+  const w = W / devicePixelRatio;
+  const h = H / devicePixelRatio;
+
+  // 半透明黑色叠加 → 拖影效果
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+  ctx.fillRect(0, 0, w, h);
+
+  // 星云
+  ctx.globalCompositeOperation = 'lighter';
+  for (const n of nebulas) {
+    // 慢速漂移
+    n.x += n.vx; n.y += n.vy;
+    if (n.x < -n.r) n.x = w + n.r;
+    if (n.x > w + n.r) n.x = -n.r;
+    if (n.y < -n.r) n.y = h + n.r;
+    if (n.y > h + n.r) n.y = -n.r;
+
+    const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
+    grd.addColorStop(0, `hsla(${n.hue}, 80%, 50%, 0.25)`);
+    grd.addColorStop(0.6, `hsla(${n.hue}, 80%, 40%, 0.08)`);
+    grd.addColorStop(1, `hsla(${n.hue}, 80%, 30%, 0)`);
+    ctx.fillStyle = grd;
+    ctx.fillRect(n.x - n.r, n.y - n.r, n.r * 2, n.r * 2);
+  }
+  ctx.globalCompositeOperation = 'source-over';
+
+  // 星星
+  for (const s of stars) {
+    s.y -= s.speed;
+    s.phase += s.phaseSpeed;
+    const alpha = 0.5 + Math.sin(s.phase) * 0.5;
+    if (s.y < -5) s.y = h + 5;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+    ctx.fill();
+  }
+
+  // 鼠标附近加一个光晕（验证"交互"可用）
+  if (mouseX > -9000) {
+    const g = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 150);
+    g.addColorStop(0, 'rgba(100, 200, 255, 0.18)');
+    g.addColorStop(1, 'rgba(100, 200, 255, 0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(mouseX - 150, mouseY - 150, 300, 300);
+  }
+
+  requestAnimationFrame(draw);
+}
+
+window.addEventListener('resize', resize);
+resize();
+requestAnimationFrame(draw);
+</script>
+</body>
+</html>

@@ -9,7 +9,7 @@
 		"preview": "vite preview",
 		"web:serve": "vue-cli-service serve",
 		"web:build": "vue-cli-service build",
-		"electron:dev": "electron .",
+		"electron:dev": "chcp 65001 >nul && electron .",
 		"electron:build": "electron-builder --config ./electron/build/build.config.js",
 		"lint": "vue-cli-service lint",
 		"test": "echo \"Error: no test specified\" && exit 1",
@@ -27,7 +27,9 @@
 		"capture-website": "^1.4.0",
 		"electron-squirrel-startup": "^1.0.1",
 		"electron-updater": "^6.2.1",
+		"koffi": "^2.11.0",
 		"request": "^2.88.2",
+		"sharp": "^0.35.3",
 		"vue": "^3.5.17",
 		"vue-router": "^4.5.1",
 		"wallpaper": "^5.0.1"

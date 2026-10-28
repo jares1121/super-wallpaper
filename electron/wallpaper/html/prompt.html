@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN" data-page-node-id="WRjIyhLCxCMpwQIPXhHnUc">
+<head data-page-node-id="thC28T8fjPIPhpI8e7RGrD">
+<meta charset="UTF-8" data-page-node-id="VsFcdhUCFpAS4NTkGiSDRI" />
+<title>输入网页地址</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", sans-serif;
+    background: #1e1e2e; color: #fff;
+    padding: 18px; margin: 0;
+  }
+  .label { font-size: 14px; margin-bottom: 10px; }
+  input {
+    width: 100%; padding: 9px 10px; font-size: 14px;
+    border: 1px solid #444; border-radius: 6px;
+    background: #2a2a3c; color: #fff; outline: none;
+  }
+  input:focus { border-color: #7aa2f7; }
+  .row { margin-top: 14px; text-align: right; }
+  button {
+    padding: 7px 16px; margin-left: 8px; font-size: 13px;
+    border: none; border-radius: 6px; cursor: pointer;
+    background: #7aa2f7; color: #11131f;
+  }
+  button.cancel { background: #444; color: #fff; }
+</style>
+</head>
+<body data-page-node-id="72o5ke8jesl22bDYVaK4Mq">
+  <div class="label" data-page-node-id="BNG6RmiKfSrnVNHgrWd8Sv">输入网页地址 (以 http:// 或 https:// 开头):</div>
+  <input id="u" placeholder="https://example.com" autofocus data-page-node-id="cYMyFEMTBhOcpK05ylG30G" />
+  <div class="row" data-page-node-id="02vjIxgES9ue4bwUcSOP8H">
+    <button id="cancel" class="cancel" data-page-node-id="Zy6TpeZtsqCKlKcloMTPjF">取消</button>
+    <button id="ok" data-page-node-id="MzMGYcNdzQsRpBFvBQofhy">确定</button>
+  </div>
+  <script>
+    const ipc = window.electronAPI
+    function submit() {
+      const v = document.getElementById('u').value.trim()
+      if (v) ipc.send('wallpaper:set-url', v)
+      window.close()
+    }
+    document.getElementById('ok').onclick = submit
+    document.getElementById('cancel').onclick = () => window.close()
+    document.getElementById('u').addEventListener('keydown', e => {
+      if (e.key === 'Enter') submit()
+    })
+  </script>
+</body>
+</html>
